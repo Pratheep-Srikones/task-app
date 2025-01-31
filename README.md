@@ -60,14 +60,6 @@ npm run dev
 
 Now open **[http://localhost:3000](http://localhost:3000)** in your browser.
 
-## 📌 API Routes
-
-| Method | Endpoint       | Description                 |
-|--------|--------------|-----------------------------|
-| POST   | /api/tasks/add  | Add a new task             |
-| GET    | /api/tasks      | Retrieve all tasks         |
-| PUT    | /api/tasks/:id  | Update a task              |
-| DELETE | /api/tasks/:id  | Delete a task              |
 
 ## 🤝 Contributing
 
