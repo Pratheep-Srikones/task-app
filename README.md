@@ -2,7 +2,7 @@
 
 A **modern, full-stack task management application** built with **Next.js 15, Supabase, and TailwindCSS**. This app allows users to create, update, and delete tasks while ensuring a smooth and responsive user experience.
 
-![Task Manager App](./screenshot.png) 
+![Task Manager App](./home.png) 
 
 ## 🌟 Features
 
