@@ -11,6 +11,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { notifyError, notifySuccess, notifyWarning } from "@/utils/notify";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = () => {
   const [username, setUsername] = useState<string>("");
@@ -300,6 +301,7 @@ const HomePage = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
