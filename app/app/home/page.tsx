@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const HomePage = () => {
+  const [username, setUsername] = useState<string>("");
   const router = useRouter();
   const [pendingTasks, setPendingTasks] = useState<Task[]>([]);
   const [title, setTitle] = useState("");
@@ -32,6 +33,7 @@ const HomePage = () => {
 
     if (storedUser_id) {
       setUser_id(storedUser_id);
+      setUsername(localStorage.getItem("username") as string);
     } else {
       setUser_id(""); // Set to empty string explicitly if no user_id is found
     }
@@ -75,6 +77,7 @@ const HomePage = () => {
           setTitle("");
           setDescription("");
           setDueDate("");
+          toggle();
         })
         .catch((error) => {
           console.error("Error adding task:", error);
@@ -133,7 +136,7 @@ const HomePage = () => {
       </div>
       <div className="flex flex-col items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-lg">
         <h1 className="text-3xl font-bold text-center mb-6">
-          Welcome, Pratheep
+          Welcome, {username}
         </h1>
         <div className="w-full flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold text-center mb-4 text-blue-500">
