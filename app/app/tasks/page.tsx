@@ -12,7 +12,7 @@ import { Task } from "@/types/types";
 import { formatDate } from "@/utils/date.util";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();

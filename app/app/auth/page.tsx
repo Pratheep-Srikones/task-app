@@ -3,7 +3,7 @@
 import { user_id } from "@/data/data";
 import { logIn, signIn } from "@/services/auth.services";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const AuthPage = () => {
   const [mode, setMode] = useState<string>("login");
