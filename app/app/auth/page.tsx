@@ -1,12 +1,22 @@
 "use client";
 
+import { user_id } from "@/data/data";
 import { logIn, signIn } from "@/services/auth.services";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const AuthPage = () => {
   const [mode, setMode] = useState<string>("login");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user_id && user_id !== "") {
+      router.push("/home");
+    }
+  });
 
   const handleModeChange = (mode: string) => {
     setMode(mode);

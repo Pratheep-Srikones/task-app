@@ -12,8 +12,10 @@ import { Task } from "@/types/types";
 import { formatDate } from "@/utils/date.util";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Page = () => {
+  const router = useRouter();
   const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [x, setX] = useState(false);
 
@@ -21,6 +23,12 @@ const Page = () => {
   const [action, setAction] = useState("edit");
 
   const [currTask, setCurrTask] = useState<Task | null>();
+
+  useEffect(() => {
+    if (!user_id || user_id === "") {
+      router.push("/auth");
+    }
+  });
 
   const toggle = () => {
     setX(!x);

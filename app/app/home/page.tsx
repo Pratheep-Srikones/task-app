@@ -10,8 +10,10 @@ import { Task } from "@/types/types";
 import { formatDate } from "@/utils/date.util";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const router = useRouter();
   const [pendingTasks, setPendingTasks] = React.useState<Task[]>([]);
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
@@ -22,6 +24,12 @@ const HomePage = () => {
   const toggle = () => {
     setX(!x);
   };
+
+  useEffect(() => {
+    if (!user_id || user_id === "") {
+      router.push("/auth");
+    }
+  });
 
   useEffect(() => {
     const fetchPendingTasks = async () => {
@@ -92,7 +100,13 @@ const HomePage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4">
       <div>
-        <button className="fixed top-8 right-8 md:right-10 bg-red-600/60 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-red-950 transition duration-300 hover:after:content-['Log_out'] after:content-['<<'] hover:rounded-lg" />
+        <button
+          onClick={() => {
+            localStorage.clear();
+            router.push("/auth");
+          }}
+          className="fixed top-8 right-8 md:right-10 bg-red-600/60 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-red-950 transition duration-300 hover:after:content-['Log_out'] after:content-['<<'] hover:rounded-lg"
+        />
       </div>
       <div className="flex flex-col items-center justify-center bg-gray-800 p-8 rounded-2xl shadow-xl w-full max-w-lg">
         <h1 className="text-3xl font-bold text-center mb-6">
