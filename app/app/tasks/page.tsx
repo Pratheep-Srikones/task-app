@@ -1,5 +1,4 @@
 "use client";
-import { user_id } from "@/data/data";
 import {
   completeTask,
   deleteCompletedTasks,
@@ -24,11 +23,30 @@ const Page = () => {
 
   const [currTask, setCurrTask] = useState<Task | null>();
 
+  const [user_id, setUser_id] = useState<string | null>(null); // Initialize as null
+
   useEffect(() => {
-    if (!user_id || user_id === "") {
-      router.push("/auth");
+    const storedUser_id = localStorage.getItem("user_id");
+
+    if (storedUser_id) {
+      setUser_id(storedUser_id);
+    } else {
+      setUser_id(""); // Set to empty string explicitly if no user_id is found
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (user_id === null) {
+      return; // Don't run until user_id is initialized
+    }
+
+    if (!user_id) {
+      console.log("User not logged in. Redirecting...");
+      router.push("/auth");
+    } else {
+      console.log("User logged in");
+    }
+  }, [user_id, router]);
 
   const toggle = () => {
     setX(!x);
@@ -150,7 +168,7 @@ const Page = () => {
       }
     };
     fetchTasks();
-  }, [x]);
+  }, [user_id, x]);
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white p-4">
       <div className="flex flex-col items-center justify-center bg-gray-600/40 p-8 rounded-2xl shadow-xl w-full max-w-lg">

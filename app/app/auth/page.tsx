@@ -1,6 +1,5 @@
 "use client";
 
-import { user_id } from "@/data/data";
 import { logIn, signIn } from "@/services/auth.services";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -12,11 +11,30 @@ const AuthPage = () => {
 
   const router = useRouter();
 
+  const [user_id, setUser_id] = useState<string | null>(null); // Initialize as null
+
   useEffect(() => {
-    if (user_id && user_id !== "") {
-      router.push("/home");
+    const storedUser_id = localStorage.getItem("user_id");
+
+    if (storedUser_id) {
+      setUser_id(storedUser_id);
+    } else {
+      setUser_id(""); // Set to empty string explicitly if no user_id is found
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (user_id === null) {
+      return; // Don't run until user_id is initialized
+    }
+
+    if (user_id) {
+      console.log("User logged in. Redirecting...");
+      router.push("/home");
+    } else {
+      console.log("User not logged in");
+    }
+  }, [user_id, router]);
 
   const handleModeChange = (mode: string) => {
     setMode(mode);
@@ -34,6 +52,8 @@ const AuthPage = () => {
           alert("Logged In Successfully");
           setUsername("");
           setPassword("");
+          setTimeout(() => {}, 500);
+          router.push("/home");
         })
         .catch((error) => {
           console.error("Error logging in:", error.response.data.error);

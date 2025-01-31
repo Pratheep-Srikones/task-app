@@ -11,7 +11,8 @@ export async function POST(req: Request) {
     );
   }
   try {
-    const user = await getUserModel(username);
+    const users = await getUserModel(username);
+    const user = users?.[0];
     if (user) {
       return NextResponse.json(
         { error: "Username already exists" },
