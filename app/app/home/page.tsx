@@ -10,6 +10,7 @@ import { formatDate } from "@/utils/date.util";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { notifyError, notifySuccess, notifyWarning } from "@/utils/notify";
 
 const HomePage = () => {
   const [username, setUsername] = useState<string>("");
@@ -67,12 +68,12 @@ const HomePage = () => {
   const handleAddTask = async () => {
     try {
       if (!title || !description || !dueDate) {
-        alert("All fields are required.");
+        notifyWarning("All fields are required.");
         return;
       }
       await addTask(title, description, dueDate, user_id as string)
         .then(() => {
-          alert("Task added successfully.");
+          notifySuccess("Task added successfully.");
           setModalOpen(false);
           setTitle("");
           setDescription("");
@@ -81,7 +82,7 @@ const HomePage = () => {
         })
         .catch((error) => {
           console.error("Error adding task:", error);
-          alert("Error adding task.");
+          notifyError("Error adding task.");
         });
     } catch (error) {
       console.error("Error adding task:", error);
@@ -92,12 +93,12 @@ const HomePage = () => {
     try {
       await completeTask(task_id)
         .then(() => {
-          alert("Task completed successfully.");
+          notifySuccess("Task completed successfully.");
           toggle();
         })
         .catch((error) => {
           console.error("Error completing task:", error);
-          alert("Error completing task.");
+          notifyError("Error completing task.");
         });
     } catch (error) {
       console.error("Error completing task:", error);
@@ -108,12 +109,12 @@ const HomePage = () => {
     try {
       await deleteCompletedTasks(user_id as string)
         .then(() => {
-          alert("Completed tasks deleted successfully.");
+          notifySuccess("Completed tasks deleted successfully.");
           toggle();
         })
         .catch((error) => {
           console.error("Error deleting completed tasks:", error);
-          alert("Error deleting completed tasks.");
+          notifyError("Error deleting completed tasks.");
         });
     } catch (error) {
       console.error("Error deleting completed tasks:", error);

@@ -1,3 +1,6 @@
+"use client";
+import { TypewriterEffect } from "@/components/typewriter-effect";
+import { description } from "@/data/data";
 import Link from "next/link";
 
 export default function Home() {
@@ -6,10 +9,10 @@ export default function Home() {
       {/* Main Content */}
       <div className="flex flex-col items-center justify-center flex-grow">
         <h1 className="text-6xl font-bold mb-4">Task Sparc</h1>
-        <p className="text-lg text-gray-300 mb-8 max-w-2xl text-center">
+        <TypewriterEffect words={description} />
+        <p className="text-lg text-gray-300 my-8 max-w-2xl text-center">
           Task Sparc is your ultimate task management solution. Organize, and
           track your tasks effortlessly with a sleek and intuitive interface.
-          Boost your productivity today!
         </p>
         <div className="flex space-x-4">
           <Link href="/auth">

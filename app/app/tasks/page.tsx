@@ -12,6 +12,8 @@ import { formatDate } from "@/utils/date.util";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { notifyError, notifySuccess } from "@/utils/notify";
+import { ToastContainer } from "react-toastify";
 
 const Page = () => {
   const router = useRouter();
@@ -55,12 +57,12 @@ const Page = () => {
     try {
       await completeTask(task_id)
         .then(() => {
-          alert("Task completed successfully.");
+          notifySuccess("Task completed successfully.");
           toggle();
         })
         .catch((error) => {
           console.error("Error completing task:", error);
-          alert("Error completing task.");
+          notifyError("Error completing task.");
         });
     } catch (error) {
       console.error("Error completing task:", error);
@@ -71,12 +73,12 @@ const Page = () => {
     try {
       await undoTask(task_id)
         .then(() => {
-          alert("completeion undone successfully.");
+          notifySuccess("completeion undone successfully.");
           toggle();
         })
         .catch((error) => {
           console.error("Error completing task:", error);
-          alert("Error completing task.");
+          notifyError("Error completing task.");
         });
     } catch (error) {
       console.error("Error completing task:", error);
@@ -87,12 +89,12 @@ const Page = () => {
     try {
       await deleteCompletedTasks(user_id as string)
         .then(() => {
-          alert("Completed tasks deleted successfully.");
+          notifySuccess("Completed tasks deleted successfully.");
           toggle();
         })
         .catch((error) => {
           console.error("Error deleting completed tasks:", error);
-          alert("Error deleting completed tasks.");
+          notifyError("Error deleting completed tasks.");
         });
     } catch (error) {
       console.error("Error deleting completed tasks:", error);
@@ -118,14 +120,14 @@ const Page = () => {
       }
       await deleteTask(currTask.task_id)
         .then(() => {
-          alert("Task deleted successfully.");
+          notifySuccess("Task deleted successfully.");
           setModalOpen(false);
           setCurrTask(null);
           toggle();
         })
         .catch((error) => {
           console.error("Error deleting task:", error);
-          alert("Error deleting task.");
+          notifyError("Error deleting task.");
         });
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -144,14 +146,14 @@ const Page = () => {
         currTask.due_at
       )
         .then(() => {
-          alert("Task edited successfully.");
+          notifySuccess("Task edited successfully.");
           setModalOpen(false);
           setCurrTask(null);
           toggle();
         })
         .catch((error) => {
           console.error("Error editing task:", error);
-          alert("Error editing task.");
+          notifyError("Error editing task.");
         });
     } catch (error) {
       console.error("Error editing task: ", error);
@@ -370,6 +372,7 @@ const Page = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

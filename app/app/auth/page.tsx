@@ -3,6 +3,7 @@
 import { logIn, signIn } from "@/services/auth.services";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { notifyError, notifySuccess, notifyWarning } from "@/utils/notify";
 
 const AuthPage = () => {
   const [mode, setMode] = useState<string>("login");
@@ -42,14 +43,14 @@ const AuthPage = () => {
 
   const handleLogin = () => {
     if (!username || !password) {
-      alert("Please fill all the fields");
+      notifyWarning("Please fill all the fields");
       return;
     }
     // Call the login API
     try {
       logIn(username, password)
         .then(() => {
-          alert("Logged In Successfully");
+          notifySuccess("Logged In Successfully");
           setUsername("");
           setPassword("");
           setTimeout(() => {}, 500);
@@ -57,7 +58,7 @@ const AuthPage = () => {
         })
         .catch((error) => {
           console.error("Error logging in:", error.response.data.error);
-          alert(error.response.data.error);
+          notifyError(error.response.data.error);
         });
     } catch (error) {
       console.error("Error logging in:", error);
@@ -65,21 +66,21 @@ const AuthPage = () => {
   };
   const handleSignup = () => {
     if (!username || !password) {
-      alert("Please fill all the fields");
+      notifyWarning("Please fill all the fields");
       return;
     }
     // Call the signup API
     try {
       signIn(username, password)
         .then(() => {
-          alert("User created successfully, Proceed to Log In");
+          notifySuccess("User created successfully, Proceed to Log In");
           setUsername("");
           setPassword("");
           setMode("login");
         })
         .catch((error) => {
           console.error("Error signing up:", error.response.data.error);
-          alert(error.response.data.error);
+          notifyError(error.response.data.error);
         });
     } catch (error) {
       console.error("Error signing up:", error);
