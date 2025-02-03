@@ -158,7 +158,7 @@ const HomePage = () => {
                     {task.description}
                   </p>
                 </div>
-                <div className="text-center sm:text-right sm:ml-4 whitespace-nowrap">
+                <div className="text-center sm:text-right sm:ml-4 min-w-max">
                   <p className="text-sm font-medium text-red-400">
                     Due: {formatDate(task.due_at)}
                   </p>

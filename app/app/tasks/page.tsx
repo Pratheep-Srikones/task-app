@@ -188,7 +188,7 @@ const Page = () => {
                   {task.description}
                 </p>
               </div>
-              <div className="text-center sm:text-right sm:ml-4 whitespace-nowrap">
+              <div className="text-center sm:text-right sm:ml-4 min-w-max">
                 <p
                   className={`text-sm font-medium ${
                     task.status === "completed"
@@ -199,7 +199,7 @@ const Page = () => {
                   Due: {formatDate(task.due_at)}
                 </p>
               </div>
-              <div className="mt-2 sm:mt-0 sm:ml-4">
+              <div className="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
                 {task.status === "pending" ? (
                   <button
                     onClick={() => handleTaskCompletion(task.task_id)}
@@ -216,7 +216,7 @@ const Page = () => {
                   </button>
                 )}
               </div>
-              <div className="mt-2 sm:mt-0 sm:ml-4">
+              <div className="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
                 <button
                   onClick={() => handleEditModalOpen(task.task_id)}
                   className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
@@ -237,7 +237,7 @@ const Page = () => {
                   </svg>
                 </button>
               </div>
-              <div className="mt-2 sm:mt-0 sm:ml-4">
+              <div className="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
                 <button
                   onClick={() => handledeleteModalOpen(task.task_id)}
                   className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition-transform transform hover:scale-105"
