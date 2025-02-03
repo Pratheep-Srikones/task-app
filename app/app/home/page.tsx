@@ -148,13 +148,17 @@ const HomePage = () => {
             {pendingTasks.map((task) => (
               <div
                 key={task.task_id}
-                className="flex flex-col sm:flex-row items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 transition-all"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 transition-all"
               >
-                <div className="flex-1 mb-2 sm:mb-0">
-                  <h3 className="text-xl font-semibold">{task.title}</h3>
-                  <p className="text-sm text-gray-300">{task.description}</p>
+                <div className="flex-1 w-full min-w-0">
+                  <h3 className="text-xl font-semibold break-words">
+                    {task.title}
+                  </h3>
+                  <p className="text-sm text-gray-300 break-words overflow-hidden overflow-ellipsis">
+                    {task.description}
+                  </p>
                 </div>
-                <div className="text-center sm:text-right sm:ml-4">
+                <div className="text-center sm:text-right sm:ml-4 whitespace-nowrap">
                   <p className="text-sm font-medium text-red-400">
                     Due: {formatDate(task.due_at)}
                   </p>
@@ -170,15 +174,15 @@ const HomePage = () => {
               </div>
             ))}
           </div>
-          <div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mt-4">
             <button
               onClick={handleDeleteCompletedTasks}
-              className="my-4 px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition-all"
+              className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition-all"
             >
               Delete Completed Tasks
             </button>
             <Link href="/tasks">
-              <button className="my-4 mx-2 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-all">
+              <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-all">
                 View All Tasks
               </button>
             </Link>
@@ -188,7 +192,7 @@ const HomePage = () => {
       <div>
         <button
           onClick={() => setModalOpen(true)}
-          className="fixed bottom-8 right-8 md:right-10 bg-blue-600/60 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-950 transition duration-300 hover:after:content-['+_Add_Task'] after:content-['+'] hover:rounded-lg"
+          className="fixed bottom-8 right-8 md:right-10 bg-blue-600/60 text-white text-lg font-bold py-3 px-6 rounded-full shadow-lg hover:bg-blue-950 transition duration-300 after:content-['+'] hover:after:content-['+_Add_Task'] hover:rounded-lg"
         />
       </div>
 

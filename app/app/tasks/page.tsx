@@ -178,15 +178,17 @@ const Page = () => {
           {allTasks.map((task) => (
             <div
               key={task.task_id}
-              className="flex flex-col sm:flex-row items-center justify-between p-4 bg-gray-800 rounded-lg shadow-md hover:bg-gray-700 transition-all"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-800 rounded-lg shadow-md hover:bg-gray-700 transition-all"
             >
-              <div className="flex-1 mb-2 sm:mb-0">
-                <h3 className="text-xl font-semibold text-white">
+              <div className="flex-1 w-full min-w-0">
+                <h3 className="text-xl font-semibold text-white break-words">
                   {task.title}
                 </h3>
-                <p className="text-sm text-gray-400">{task.description}</p>
+                <p className="text-sm text-gray-400 break-words overflow-hidden overflow-ellipsis">
+                  {task.description}
+                </p>
               </div>
-              <div className="text-center sm:text-right sm:ml-4">
+              <div className="text-center sm:text-right sm:ml-4 whitespace-nowrap">
                 <p
                   className={`text-sm font-medium ${
                     task.status === "completed"
@@ -238,7 +240,7 @@ const Page = () => {
               <div className="mt-2 sm:mt-0 sm:ml-4">
                 <button
                   onClick={() => handledeleteModalOpen(task.task_id)}
-                  className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
+                  className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg shadow-lg hover:bg-red-600 transition-transform transform hover:scale-105"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -271,6 +273,7 @@ const Page = () => {
           </button>
         </Link>
       </div>
+
       {modalopen && (
         <div>
           <div className="w-full h-full bg-black/90 fixed top-0 left-0 flex items-center justify-center z-10">
