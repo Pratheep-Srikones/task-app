@@ -178,28 +178,29 @@ const Page = () => {
           {allTasks.map((task) => (
             <div
               key={task.task_id}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-800 rounded-lg shadow-md hover:bg-gray-700 transition-all"
+              className="flex flex-col sm:flex-col items-start sm:items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 transition-all"
             >
-              <div className="flex-1 w-full min-w-0">
+              <div className="flex flex-col  w-full min-w-0">
                 <h3 className="text-xl font-semibold text-white break-words">
                   {task.title}
                 </h3>
                 <p className="text-sm text-gray-400 break-words overflow-hidden overflow-ellipsis">
                   {task.description}
                 </p>
+                <div className="items-start sm:text-right sm:ml-4  my-2">
+                  <p
+                    className={`text-sm font-normal break-words ${
+                      task.status === "completed"
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    Due: {formatDate(task.due_at)}
+                  </p>
+                </div>
               </div>
-              <div className="text-center sm:text-right sm:ml-4 min-w-max">
-                <p
-                  className={`text-sm font-medium ${
-                    task.status === "completed"
-                      ? "text-green-400"
-                      : "text-red-400"
-                  }`}
-                >
-                  Due: {formatDate(task.due_at)}
-                </p>
-              </div>
-              <div className="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
+
+              <div className="my-2 sm:mt-0 sm:ml-4 flex-shrink-0">
                 {task.status === "pending" ? (
                   <button
                     onClick={() => handleTaskCompletion(task.task_id)}
@@ -216,7 +217,7 @@ const Page = () => {
                   </button>
                 )}
               </div>
-              <div className="mt-2 sm:mt-0 sm:ml-4 flex-shrink-0">
+              <div className="my-2 sm:mt-0 sm:ml-4 flex-shrink-0">
                 <button
                   onClick={() => handleEditModalOpen(task.task_id)}
                   className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-transform transform hover:scale-105"
