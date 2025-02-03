@@ -148,21 +148,22 @@ const HomePage = () => {
             {pendingTasks.map((task) => (
               <div
                 key={task.task_id}
-                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 transition-all"
+                className="flex flex-row sm:flex-row items-start sm:items-center justify-between p-4 bg-gray-700 rounded-lg shadow-md hover:bg-gray-600 transition-all"
               >
-                <div className="flex-1 w-full min-w-0">
+                <div className="flex- flex-row gap-4 w-full min-w-0">
                   <h3 className="text-xl font-semibold break-words">
                     {task.title}
                   </h3>
                   <p className="text-sm text-gray-300 break-words overflow-hidden overflow-ellipsis">
                     {task.description}
                   </p>
+                  <div className="items-start sm:text-right sm:ml-4 mt-2">
+                    <p className="text-sm font-medium text-red-400 break-words">
+                      Due: {formatDate(task.due_at)}
+                    </p>
+                  </div>
                 </div>
-                <div className="text-center sm:text-right sm:ml-4 min-w-max">
-                  <p className="text-sm font-medium text-red-400">
-                    Due: {formatDate(task.due_at)}
-                  </p>
-                </div>
+
                 <div className="mt-2 sm:mt-0 sm:ml-4">
                   <button
                     onClick={() => handleTaskCompletion(task.task_id)}
